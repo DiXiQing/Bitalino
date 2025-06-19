@@ -8,10 +8,10 @@ char var;
 int color_choice;  //色のコード指定0b0000000
 int32_t panOffset, tiltOffset;
 
-const int SV_PIN = 6;
-int32_t grip = 190,
+const int SV_PIN = 6;  // 舵机控制引脚
+int32_t grip = 190,    // 抓取舵机初始值
         pan = 700,  //実験用右向き
-        tilt = 300;
+        tilt = 300;    // 垂直舵机初始值
 
 void setup(){
   Serial.begin(9600);

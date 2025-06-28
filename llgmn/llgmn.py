@@ -84,11 +84,11 @@ class LLGMN:
 
 
 if __name__ == "__main__":
-    data_train = np.loadtxt("llgmn/data/data_train_movement_three_hundred.csv", delimiter=",")
-    label_train = np.loadtxt("llgmn/data/label_train_movement_three_hundred.csv", delimiter=",")
+    data_train = np.loadtxt("llgmn/DXQ_data/test.csv", delimiter=",")
+    label_train = np.loadtxt("llgmn/DXQ_data/label.csv", delimiter=",")
     ##data_train = np.loadtxt("llgmn/data/data_train_movement_24_655.csv", delimiter=",")
     ##label_train = np.loadtxt("llgmn/data/twenty_january_label_train_movement.csv", delimiter=",")
     ll = LLGMN()
     Y_train = ll.train(data_train, label_train)
 
-    ll.save_weight("llgmn/data/movement_weights.npy")
+    ll.save_weight("llgmn/data/dxq_movement_weights.npy")

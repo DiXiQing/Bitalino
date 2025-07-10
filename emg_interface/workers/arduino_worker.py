@@ -23,6 +23,9 @@ class ArduinoWorker(QtCore.QObject):
     def run(self):
         while not self.stop:
             recog_result = self.result_queue.get(block=True)
+            print("recog_result")
+            print(recog_result)
+
             if recog_result == "Close":
                 self.ser.write("1".encode())
             elif recog_result == "Open":
@@ -39,7 +42,7 @@ class ArduinoWorker(QtCore.QObject):
         self.stop = True
 
 if __name__ == "__main__":
-    ser = serial.Serial(port="COM3", baudrate=9600, timeout=5)
+    ser = serial.Serial(port="COM4", baudrate=9600, timeout=5)
 
     worker = ArduinoWorker(ser)
-    # worker.run()
+    worker.test()

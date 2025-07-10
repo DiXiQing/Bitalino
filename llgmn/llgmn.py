@@ -7,14 +7,23 @@ import numpy as np
 
 class LLGMN:
     def __init__(self):
+        # input:特征数 如EMG 4通道
         self.D = 4
+        # feature expansion TODO: 目前还不明白
         self.H = int(1 + self.D * (self.D + 3) / 2)
+        # output: 4种手势
         self.K = 4
+        # Gaussian mixture Components 3个 TODO: 目前还不明白
         self.M = 3
+        # 学习率
         self.epsilon = 0.1
+        # 一次处理1个样本
         self.batch_size = 1
+        # 最大训练轮数
         self.max_epoch = 500
+        # 存放数据列表
         self.data = []
+        # weight数组
         self.weight = np.random.rand(self.K, self.M, self.H)
         self.IO = {}
 
@@ -74,21 +83,40 @@ class LLGMN:
             acc = sum(np.argmax(t) == np.argmax(y) for t, y in zip(label, Y)) / len(data)
             print(epoch, ":", acc, loss, entropy)
         return Y
-
+    
     def test(self, data, label):
         Y = self.forward(data)
         acc = sum(np.argmax(t) == np.argmax(y) for t, y in zip(label, Y)) / len(data)
         print("Accurcy : ", acc)
+
+        # 真实类别和预测类别
+        y_true = np.argmax(label, axis=1)
+        y_pred = np.argmax(Y, axis=1)
+
+        # 计算混淆矩阵
+        cm = self.confusion_matrix_np(y_true, y_pred, self.K)
+
+        print(cm)
+
         return Y
-
-
+    
+    def confusion_matrix_np(self, y_true, y_pred, num_classes):
+        cm = np.zeros((num_classes, num_classes), dtype=int)
+        for t, p in zip(y_true, y_pred):
+            cm[t, p] += 1
+        return cm
 
 if __name__ == "__main__":
-    data_train = np.loadtxt("llgmn/DXQ_data/test.csv", delimiter=",")
-    label_train = np.loadtxt("llgmn/DXQ_data/label.csv", delimiter=",")
+    data_train = np.loadtxt("llgmn/DXQ_data/train_data.csv", delimiter=",")
+    label_train = np.loadtxt("llgmn/DXQ_data/train_label.csv", delimiter=",")
     ##data_train = np.loadtxt("llgmn/data/data_train_movement_24_655.csv", delimiter=",")
     ##label_train = np.loadtxt("llgmn/data/twenty_january_label_train_movement.csv", delimiter=",")
     ll = LLGMN()
+    
+    # 训练
     Y_train = ll.train(data_train, label_train)
-
     ll.save_weight("llgmn/data/dxq_movement_weights.npy")
+
+    # 测试
+    # ll.load_weight("llgmn/data/dxq_movement_weights.npy")
+    # Y_pred = ll.test(data_train, label_train)

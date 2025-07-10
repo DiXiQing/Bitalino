@@ -2,7 +2,7 @@ import pandas as pd
 import os
 
 # 要处理的文件名列表
-names = ['open', 'close', 'up', 'down']
+names = ['open', 'close', 'right', 'left']
 input_dir = 'llgmn/DXQ_data'
 output_dir = 'llgmn/DXQ_data'
 

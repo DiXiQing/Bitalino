@@ -123,7 +123,14 @@ class MainWidget(QtWidgets.QMainWindow):
     def connect_arduino(self, ser):
         if self.arduino_worker is not None:
             self.arduino_worker.stop_run()
-            
+
+        print("trigger")
+        
+        if ser.is_open:
+            print("Arduino connected")
+        else:
+            print("Arduino not connected")
+
         # arduinoのシリアル通信用thread
         self.arduino_worker = ArduinoWorker(ser)
         self.arduino_worker.moveToThread(self.arduino_thread)
@@ -199,6 +206,8 @@ class MainWidget(QtWidgets.QMainWindow):
 
     def movement_recognised(self, result):
         self.radar_plot_widget.set_recognition_result(result)
+        # print("result")
+        # print(result)
         if self.arduino_worker is not None:
             self.arduino_worker.result_queue.put(result)  # result:recognition_workerの数値のみの判別結果
     

@@ -4,3 +4,8 @@ pip install -r requirements.txt
 
 # 做混淆矩阵的库(非必要)
 pip install scikit-learn
+
+# opencv(AI CAMERA必要)
+pip install opencv-python
+pip install depthai
+pip install keyboard

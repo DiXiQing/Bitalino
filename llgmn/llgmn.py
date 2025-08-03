@@ -107,16 +107,19 @@ class LLGMN:
         return cm
 
 if __name__ == "__main__":
-    data_train = np.loadtxt("llgmn/DXQ_data/train_data.csv", delimiter=",")
-    label_train = np.loadtxt("llgmn/DXQ_data/train_label.csv", delimiter=",")
+    
+    ll = LLGMN()
+
+    # 训练
+    # data_train = np.loadtxt("llgmn/DXQ_data/train_data.csv", delimiter=",")
+    # label_train = np.loadtxt("llgmn/DXQ_data/train_label.csv", delimiter=",")
     ##data_train = np.loadtxt("llgmn/data/data_train_movement_24_655.csv", delimiter=",")
     ##label_train = np.loadtxt("llgmn/data/twenty_january_label_train_movement.csv", delimiter=",")
-    ll = LLGMN()
-    
-    # 训练
-    Y_train = ll.train(data_train, label_train)
-    ll.save_weight("llgmn/data/dxq_movement_weights.npy")
+    # Y_train = ll.train(data_train, label_train)
+    # ll.save_weight("llgmn/data/dxq_movement_weights.npy")
 
     # 测试
-    # ll.load_weight("llgmn/data/dxq_movement_weights.npy")
-    # Y_pred = ll.test(data_train, label_train)
+    data_test = np.loadtxt("llgmn/DXQ_data/test_data.csv", delimiter=",")
+    label_test = np.loadtxt("llgmn/DXQ_data/test_label.csv", delimiter=",")
+    ll.load_weight("llgmn/data/dxq_movement_weights.npy")
+    Y_pred = ll.test(data_test, label_test)

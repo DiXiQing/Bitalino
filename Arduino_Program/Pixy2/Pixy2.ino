@@ -53,7 +53,7 @@ void loop() {
     if (targetIndex != -1) {
       // 2. 获取目标的中心X坐标
       int targetX = pixy.ccc.blocks[targetIndex].m_x;
-      int targetY = pixy.ccc.blocks[targetIndex].m_y;
+      int targetY = pixy.ccc.blocks[targetIndex].m_y; 
       
       int centerX = 159; // Pixy2图像中心
 

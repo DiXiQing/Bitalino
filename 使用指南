@@ -9,3 +9,6 @@ pip install scikit-learn
 pip install opencv-python
 pip install depthai
 pip install keyboard
+
+# 运行指令
+python -m emg_interface.main_widget

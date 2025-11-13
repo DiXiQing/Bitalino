@@ -1,0 +1,8 @@
+1 - one
+2 - two
+3 - ok
+4 - paper
+5 - rock
+6 - good
+7 - gun
+8 - rest
